@@ -30,15 +30,21 @@ export default function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-4">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <span className="text-4xl font-display text-an-white">AN</span>
+            <img src="/logo-white.svg" alt="Architect Nexus" className="h-12 w-auto" />
           </div>
           <p className="text-sm text-an-muted">
             Design • Build • Inspire • Impact
           </p>
           <div className="flex items-center gap-3 text-an-muted">
-            <IconBrandInstagram className="h-5 w-5" />
-            <IconBrandLinkedin className="h-5 w-5" />
-            <IconBrandWhatsapp className="h-5 w-5" />
+            <a href="https://instagram.com" aria-label="Instagram">
+              <IconBrandInstagram className="h-5 w-5" />
+            </a>
+            <a href="https://linkedin.com" aria-label="LinkedIn">
+              <IconBrandLinkedin className="h-5 w-5" />
+            </a>
+            <a href="https://wa.me/918637069862" aria-label="WhatsApp">
+              <IconBrandWhatsapp className="h-5 w-5" />
+            </a>
           </div>
         </div>
         <div>

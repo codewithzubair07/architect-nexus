@@ -35,37 +35,34 @@ export default function CustomCursor() {
     window.addEventListener("mouseleave", handleLeave);
     rafId = requestAnimationFrame(render);
 
-    const linkElements = document.querySelectorAll("a, button, [data-cursor='link']");
-    const cardElements = document.querySelectorAll("[data-cursor='card']");
-
     const addLink = () => cursor.classList.add("cursor--link");
     const removeLink = () => cursor.classList.remove("cursor--link");
     const addCard = () => cursor.classList.add("cursor--card");
     const removeCard = () => cursor.classList.remove("cursor--card");
 
-    linkElements.forEach((element) => {
-      element.addEventListener("mouseenter", addLink);
-      element.addEventListener("mouseleave", removeLink);
-    });
+    const handlePointerOver = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+      if (target.closest("a, button, [data-cursor='link']")) {
+        addLink();
+      } else {
+        removeLink();
+      }
+      if (target.closest("[data-cursor='card']")) {
+        addCard();
+      } else {
+        removeCard();
+      }
+    };
 
-    cardElements.forEach((element) => {
-      element.addEventListener("mouseenter", addCard);
-      element.addEventListener("mouseleave", removeCard);
-    });
+    document.addEventListener("mouseover", handlePointerOver);
 
     return () => {
       window.removeEventListener("mousemove", handleMove);
       window.removeEventListener("mouseenter", handleEnter);
       window.removeEventListener("mouseleave", handleLeave);
       cancelAnimationFrame(rafId);
-      linkElements.forEach((element) => {
-        element.removeEventListener("mouseenter", addLink);
-        element.removeEventListener("mouseleave", removeLink);
-      });
-      cardElements.forEach((element) => {
-        element.removeEventListener("mouseenter", addCard);
-        element.removeEventListener("mouseleave", removeCard);
-      });
+      document.removeEventListener("mouseover", handlePointerOver);
     };
   }, []);
 

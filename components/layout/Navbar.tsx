@@ -49,9 +49,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-3 text-lg font-semibold">
-          <span className="font-display text-2xl tracking-widest text-an-gold">
-            AN
-          </span>
+          <img src="/logo.svg" alt="Architect Nexus" className="h-10 w-auto" />
         </Link>
         <nav className="hidden items-center gap-8 text-sm uppercase tracking-[0.2em] md:flex">
           {navLinks.map((link) => {
@@ -91,9 +89,7 @@ export default function Navbar() {
           className="fixed inset-0 z-50 flex flex-col bg-an-black px-6 py-10"
         >
           <div className="flex items-center justify-between">
-            <span className="font-display text-2xl tracking-widest text-an-gold">
-              AN
-            </span>
+            <img src="/logo.svg" alt="Architect Nexus" className="h-10 w-auto" />
             <button onClick={() => setOpen(false)} aria-label="Close menu">
               <IconX className="h-7 w-7 text-an-gold" />
             </button>
