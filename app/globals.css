@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  --an-black: #0a0a0a;
+  --an-surface: #111111;
+  --an-surface2: #1a1a1a;
+  --an-gold: #c9a84c;
+  --an-gold-dim: rgba(201, 168, 76, 0.15);
+  --an-white: #ffffff;
+  --an-muted: #888888;
+  --an-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--an-black);
+  color: var(--an-white);
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--an-black);
+  color: var(--an-white);
+  font-family: var(--font-body), sans-serif;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.lenis {
+  height: auto;
+}
+
+@media (hover: none) {
+  html {
+    cursor: auto;
+  }
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--an-gold);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: normal;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease, background 0.2s ease, width 0.2s ease,
+    height 0.2s ease, border 0.2s ease, mix-blend-mode 0.2s ease;
+}
+
+.cursor--link {
+  width: 48px;
+  height: 48px;
+  mix-blend-mode: difference;
+}
+
+.cursor--card {
+  width: 56px;
+  height: 56px;
+  background: transparent;
+  border: 2px solid var(--an-gold);
+}
+
+.cursor--hidden {
+  opacity: 0;
+}
