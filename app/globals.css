@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -9,6 +10,9 @@
   --an-white: #ffffff;
   --an-muted: #888888;
   --an-border: rgba(255, 255, 255, 0.08);
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 * {

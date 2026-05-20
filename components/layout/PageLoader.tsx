@@ -12,8 +12,8 @@ export default function PageLoader() {
   useEffect(() => {
     const hasLoaded = sessionStorage.getItem("an_has_loaded");
     if (hasLoaded) {
-      setVisible(false);
-      return;
+      const raf = requestAnimationFrame(() => setVisible(false));
+      return () => cancelAnimationFrame(raf);
     }
 
     sessionStorage.setItem("an_has_loaded", "true");
