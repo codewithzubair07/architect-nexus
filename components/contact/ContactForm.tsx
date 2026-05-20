@@ -35,6 +35,9 @@ const budgetOptions = [
   "Let's discuss",
 ];
 
+const inputClassName =
+  "w-full rounded-xl border border-an-border bg-an-black/60 px-4 py-3 text-sm outline-none transition focus:border-an-gold focus:shadow-[0_0_0_3px_rgba(0,229,255,0.12)]";
+
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const searchParams = useSearchParams();
@@ -72,8 +75,8 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-an-border bg-an-surface p-10 text-center">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-an-gold text-xl text-an-black">
+      <div className="rounded-2xl border border-an-border bg-an-surface/70 p-10 text-center backdrop-blur" data-reveal>
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-an-gold text-xl text-an-black shadow-[0_0_28px_rgba(0,229,255,0.45)]">
           ✓
         </div>
         <h3 className="mt-6 text-2xl font-display">Message Sent!</h3>
@@ -85,13 +88,9 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)} data-reveal>
       <div>
-        <input
-          {...register("fullName")}
-          placeholder="Full Name"
-          className="w-full rounded-lg border border-an-border bg-an-black px-4 py-3 text-sm"
-        />
+        <input {...register("fullName")} placeholder="Full Name" className={inputClassName} />
         {errors.fullName ? (
           <p className="mt-1 text-xs text-red-400">{errors.fullName.message}</p>
         ) : null}
@@ -101,7 +100,7 @@ export default function ContactForm() {
           {...register("email")}
           placeholder="Email Address"
           type="email"
-          className="w-full rounded-lg border border-an-border bg-an-black px-4 py-3 text-sm"
+          className={inputClassName}
         />
         {errors.email ? (
           <p className="mt-1 text-xs text-red-400">{errors.email.message}</p>
@@ -112,17 +111,14 @@ export default function ContactForm() {
           {...register("phone")}
           placeholder="Phone Number"
           type="tel"
-          className="w-full rounded-lg border border-an-border bg-an-black px-4 py-3 text-sm"
+          className={inputClassName}
         />
         {errors.phone ? (
           <p className="mt-1 text-xs text-red-400">{errors.phone.message}</p>
         ) : null}
       </div>
       <div>
-        <select
-          {...register("service")}
-          className="w-full rounded-lg border border-an-border bg-an-black px-4 py-3 text-sm"
-        >
+        <select {...register("service")} className={inputClassName}>
           <option value="">Service Interested</option>
           {serviceOptions.map((option) => (
             <option key={option} value={option}>
@@ -135,10 +131,7 @@ export default function ContactForm() {
         ) : null}
       </div>
       <div>
-        <select
-          {...register("budget")}
-          className="w-full rounded-lg border border-an-border bg-an-black px-4 py-3 text-sm"
-        >
+        <select {...register("budget")} className={inputClassName}>
           <option value="">Budget Range</option>
           {budgetOptions.map((option) => (
             <option key={option} value={option}>
@@ -154,7 +147,7 @@ export default function ContactForm() {
         {...register("message")}
         placeholder="Message"
         rows={4}
-        className="w-full rounded-lg border border-an-border bg-an-black px-4 py-3 text-sm"
+        className={inputClassName}
       />
       <GoldButton size="lg" type="submit">
         Send Message

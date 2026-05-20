@@ -36,7 +36,7 @@ const services = [
 
 export default function ServicesTeaser() {
   return (
-    <section className="bg-an-black py-24">
+    <section className="py-24" data-reveal>
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6">
         <SectionLabel text="WHAT WE DO" />
         <div className="text-4xl font-display leading-tight md:text-6xl">
@@ -50,7 +50,7 @@ export default function ServicesTeaser() {
             return (
               <div
                 key={service.title}
-                className="group rounded-xl border border-an-border bg-an-surface p-8 transition hover:-translate-y-2 hover:border-an-gold/20"
+                className="group rounded-2xl border border-an-border bg-an-surface/70 p-8 shadow-[0_0_0_1px_rgba(0,229,255,0.08)] transition hover:-translate-y-1 hover:border-an-gold/70"
                 data-cursor="card"
               >
                 <Icon className="h-8 w-8 text-an-gold" />

@@ -24,14 +24,15 @@ export default function PricingCard({
 }: PricingCardProps) {
   return (
     <div
-      className={`relative flex h-full flex-col rounded-2xl border p-8 ${
+      className={`relative flex h-full flex-col rounded-2xl border p-8 backdrop-blur ${
         featured
-          ? "border-an-gold bg-an-surface2"
-          : "border-an-border bg-an-surface"
+          ? "border-an-gold bg-an-surface2 shadow-[0_0_35px_rgba(0,229,255,0.2)]"
+          : "border-an-border bg-an-surface/70"
       }`}
+      data-reveal
     >
       {badge ? (
-        <span className="absolute -top-4 left-6 rounded-full bg-an-gold px-4 py-1 text-xs font-semibold text-an-black">
+        <span className="absolute -top-4 left-6 rounded-full border border-an-gold/70 bg-an-black px-4 py-1 text-xs font-semibold text-an-gold">
           {badge}
         </span>
       ) : null}

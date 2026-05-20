@@ -2,14 +2,14 @@
 @import "tailwindcss";
 
 :root {
-  --an-black: #0a0a0a;
-  --an-surface: #111111;
-  --an-surface2: #1a1a1a;
-  --an-gold: #c9a84c;
-  --an-gold-dim: rgba(201, 168, 76, 0.15);
-  --an-white: #ffffff;
-  --an-muted: #888888;
-  --an-border: rgba(255, 255, 255, 0.08);
+  --an-black: #030711;
+  --an-surface: #0b1428;
+  --an-surface2: #111f3c;
+  --an-gold: #00e5ff;
+  --an-gold-dim: rgba(0, 229, 255, 0.2);
+  --an-white: #f8fbff;
+  --an-muted: #91a8cf;
+  --an-border: rgba(0, 229, 255, 0.24);
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
@@ -28,7 +28,9 @@ html {
 
 body {
   min-height: 100%;
-  background-color: var(--an-black);
+  background: radial-gradient(circle at 15% 20%, rgba(0, 229, 255, 0.18), transparent 45%),
+    radial-gradient(circle at 85% 70%, rgba(59, 130, 246, 0.2), transparent 40%),
+    linear-gradient(180deg, #030711 0%, #060c1b 100%);
   color: var(--an-white);
   font-family: var(--font-body), sans-serif;
   overflow-x: hidden;
@@ -48,9 +50,50 @@ a {
   height: auto;
 }
 
-@media (hover: none) {
-  html {
-    cursor: auto;
+.page-grid-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: linear-gradient(rgba(0, 229, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.08) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+  opacity: 0.45;
+}
+
+.glow-blob {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+  opacity: 0.42;
+  animation: floatBlob 12s ease-in-out infinite alternate;
+}
+
+.glow-blob--one {
+  width: 26rem;
+  height: 26rem;
+  top: 8vh;
+  left: -8vw;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.6), transparent 70%);
+}
+
+.glow-blob--two {
+  width: 28rem;
+  height: 28rem;
+  right: -10vw;
+  bottom: 8vh;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.45), transparent 70%);
+  animation-delay: 1.2s;
+}
+
+@keyframes floatBlob {
+  0% {
+    transform: translateY(-14px) translateX(10px);
+  }
+  100% {
+    transform: translateY(20px) translateX(-12px);
   }
 }
 
@@ -58,31 +101,59 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 999px;
-  background: var(--an-gold);
+  background: rgba(0, 229, 255, 0.9);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: normal;
   transform: translate(-50%, -50%);
   transition: transform 0.2s ease, background 0.2s ease, width 0.2s ease,
-    height 0.2s ease, border 0.2s ease, mix-blend-mode 0.2s ease;
+    height 0.2s ease, border 0.2s ease, opacity 0.2s ease;
 }
 
 .cursor--link {
-  width: 48px;
-  height: 48px;
-  mix-blend-mode: difference;
+  width: 46px;
+  height: 46px;
+  background: rgba(0, 229, 255, 0.24);
+  border: 1px solid rgba(0, 229, 255, 0.8);
 }
 
 .cursor--card {
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   background: transparent;
-  border: 2px solid var(--an-gold);
+  border: 2px solid rgba(0, 229, 255, 0.75);
 }
 
 .cursor--hidden {
   opacity: 0;
+}
+
+.orbit-ring {
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 9999px;
+}
+
+.orbit-path {
+  animation: orbit 16s linear infinite;
+}
+
+@media (max-width: 767px) {
+  .page-grid-overlay {
+    opacity: 0.24;
+    background-size: 36px 36px;
+  }
+
+  .glow-blob {
+    filter: blur(70px);
+    opacity: 0.3;
+  }
+}
+
+@media (hover: none) {
+  html {
+    cursor: auto;
+  }
 }
