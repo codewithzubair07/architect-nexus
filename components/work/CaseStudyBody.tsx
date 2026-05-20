@@ -45,15 +45,31 @@ export default function CaseStudyBody({ item, previous, next }: CaseStudyBodyPro
         </div>
         <div className="flex flex-wrap items-center justify-between gap-6 border-t border-an-border pt-8">
           {previous ? (
-            <Link href={`/work/${previous.slug}`} className="text-sm text-an-gold">
+            <Link
+              href={`/work/${previous.slug}`}
+              className="flex items-center gap-3 text-sm text-an-gold"
+            >
+              <img
+                src={previous.image}
+                alt={previous.name}
+                className="h-10 w-14 rounded-lg object-cover"
+              />
               ← {previous.name}
             </Link>
           ) : (
             <span />
           )}
           {next ? (
-            <Link href={`/work/${next.slug}`} className="text-sm text-an-gold">
+            <Link
+              href={`/work/${next.slug}`}
+              className="flex items-center gap-3 text-sm text-an-gold"
+            >
               {next.name} →
+              <img
+                src={next.image}
+                alt={next.name}
+                className="h-10 w-14 rounded-lg object-cover"
+              />
             </Link>
           ) : (
             <span />
