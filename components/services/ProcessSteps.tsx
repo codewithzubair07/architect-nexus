@@ -27,7 +27,7 @@ const steps = [
 
 export default function ProcessSteps() {
   return (
-    <section className="bg-an-surface py-24">
+    <section className="bg-an-surface/35 py-24" data-reveal>
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6">
         <SectionLabel text="HOW WE WORK" />
         <h2 className="text-4xl font-display md:text-5xl">Our Process</h2>
@@ -36,7 +36,7 @@ export default function ProcessSteps() {
           {steps.map((step) => (
             <div
               key={step.number}
-              className="relative rounded-xl border border-an-border bg-an-black p-6"
+              className="relative rounded-xl border border-an-border bg-an-black/60 p-6 backdrop-blur"
             >
               <div className="text-sm uppercase tracking-[0.2em] text-an-gold">
                 {step.number}

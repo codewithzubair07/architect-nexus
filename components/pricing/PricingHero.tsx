@@ -4,7 +4,7 @@ import SectionLabel from "@/components/shared/SectionLabel";
 
 export default function PricingHero() {
   return (
-    <section className="bg-an-black py-24">
+    <section className="py-24" data-reveal>
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 text-center">
         <SectionLabel text="TRANSPARENT PRICING" />
         <h1 className="text-5xl font-display md:text-7xl">

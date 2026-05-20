@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
+import Logo from "@/components/shared/Logo";
 
 export default function PageLoader() {
   const [visible, setVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<SVGPathElement>(null);
-  const counterRef = useRef<HTMLSpanElement>(null);
+  const logoWrapRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const hasLoaded = sessionStorage.getItem("an_has_loaded");
@@ -19,53 +21,46 @@ export default function PageLoader() {
     sessionStorage.setItem("an_has_loaded", "true");
 
     const container = containerRef.current;
-    const logo = logoRef.current;
-    const counter = counterRef.current;
-    if (!container || !logo || !counter) return;
+    const logoWrap = logoWrapRef.current;
+    const bar = barRef.current;
+    const title = titleRef.current;
+    if (!container || !logoWrap || !bar || !title) return;
 
-    const length = logo.getTotalLength();
-    logo.style.strokeDasharray = `${length}`;
-    logo.style.strokeDashoffset = `${length}`;
-
-    const progress = { value: 0 };
-
-    const timeline = gsap.timeline({
-      onComplete: () => setVisible(false),
+    const logoPaths = logoWrap.querySelectorAll("path");
+    logoPaths.forEach((path) => {
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = `${length}`;
+      path.style.strokeDashoffset = `${length}`;
     });
 
-    timeline
-      .to(logo, { strokeDashoffset: 0, duration: 1.2, ease: "power3.out" })
-      .to(
-        progress,
-        {
-          value: 100,
-          duration: 1.2,
-          ease: "power2.out",
-          onUpdate: () => {
-            counter.textContent = `${Math.round(progress.value)}`.padStart(2, "0");
-          },
-        },
-        0
-      )
-      .to(
-        container,
-        {
-          yPercent: -100,
-          duration: 0.8,
-          ease: "power2.inOut",
-          delay: 0.3,
-        },
-        ">-0.1"
-      )
-      .to(
-        logo,
-        { scale: 1.1, opacity: 0, duration: 0.6, ease: "power2.inOut" },
-        "<"
-      );
+    const tl = gsap.timeline({ onComplete: () => setVisible(false) });
 
-    return () => {
-      timeline.kill();
-    };
+    tl.to(logoPaths, {
+      strokeDashoffset: 0,
+      duration: 1.1,
+      stagger: 0.12,
+      ease: "power3.out",
+    })
+      .fromTo(
+        bar,
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.75, ease: "power2.inOut" },
+        "<0.15"
+      )
+      .fromTo(
+        title.querySelectorAll("span"),
+        { y: 26, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.55, stagger: 0.1, ease: "power2.out" },
+        ">-0.2"
+      )
+      .to(container, {
+        yPercent: -100,
+        duration: 0.75,
+        ease: "power2.inOut",
+        delay: 0.2,
+      });
+
+    return () => tl.kill();
   }, []);
 
   if (!visible) return null;
@@ -73,24 +68,21 @@ export default function PageLoader() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6 bg-an-black"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-8 bg-an-black"
     >
-      <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-        <path
-          ref={logoRef}
-          d="M20 96L60 20L100 96M38 68H82M72 26V94M92 26V94"
-          stroke="#C9A84C"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <span
-        ref={counterRef}
-        className="font-display text-2xl tracking-[0.3em] text-an-gold"
+      <div ref={logoWrapRef}>
+        <Logo size={124} glowing />
+      </div>
+      <div className="h-px w-[220px] overflow-hidden rounded-full bg-an-border">
+        <div ref={barRef} className="h-full w-full origin-left bg-an-gold" />
+      </div>
+      <div
+        ref={titleRef}
+        className="flex items-center gap-4 font-display text-4xl uppercase tracking-[0.25em]"
       >
-        00
-      </span>
+        <span>Architect</span>
+        <span className="text-an-gold">Nexus</span>
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import SectionLabel from "@/components/shared/SectionLabel";
 
 export default function ServicesHero() {
   return (
-    <section className="flex h-[60vh] items-center bg-an-black">
+    <section className="flex h-[60vh] items-center" data-reveal>
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6">
         <SectionLabel text="WHAT WE OFFER" />
         <h1 className="text-5xl font-display md:text-7xl">
@@ -14,13 +14,13 @@ export default function ServicesHero() {
           Three core pillars. One agency. Zero fluff.
         </p>
         <div className="flex flex-wrap gap-3 text-sm uppercase tracking-[0.2em] text-an-gold">
-          <a href="#web" className="border border-an-gold px-4 py-2">
+          <a href="#web" className="rounded-lg border border-an-border bg-an-surface/60 px-4 py-2 transition hover:border-an-gold">
             Web & Dev
           </a>
-          <a href="#ai" className="border border-an-gold px-4 py-2">
+          <a href="#ai" className="rounded-lg border border-an-border bg-an-surface/60 px-4 py-2 transition hover:border-an-gold">
             AI Automation
           </a>
-          <a href="#growth" className="border border-an-gold px-4 py-2">
+          <a href="#growth" className="rounded-lg border border-an-border bg-an-surface/60 px-4 py-2 transition hover:border-an-gold">
             Growth & Marketing
           </a>
         </div>

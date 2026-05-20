@@ -12,7 +12,7 @@ type GoldButtonProps = {
 };
 
 const sizeClasses: Record<NonNullable<GoldButtonProps["size"]>, string> = {
-  sm: "px-4 py-2 text-sm",
+  sm: "px-4 py-2 text-xs",
   md: "px-6 py-3 text-sm",
   lg: "px-8 py-4 text-base",
 };
@@ -24,12 +24,12 @@ export default function GoldButton({
   type = "button",
   children,
 }: GoldButtonProps) {
-  const className = `group inline-flex items-center justify-center gap-2 rounded-[4px] bg-an-gold text-an-black transition hover:brightness-110 hover:scale-[1.02] ${sizeClasses[size]}`;
+  const className = `group inline-flex items-center justify-center gap-2 rounded-[10px] border border-cyan-300/40 bg-[linear-gradient(135deg,#00E5FF_0%,#0EA5E9_100%)] text-an-black shadow-[0_8px_30px_rgba(0,229,255,0.35)] transition hover:-translate-y-0.5 hover:brightness-110 ${sizeClasses[size]}`;
 
   if (href) {
     return (
       <Link href={href} className={className} data-cursor="link">
-        <span className="font-medium">{children}</span>
+        <span className="font-semibold tracking-[0.02em]">{children}</span>
         <IconArrowNarrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
       </Link>
     );
@@ -42,7 +42,7 @@ export default function GoldButton({
       className={className}
       data-cursor="link"
     >
-      <span className="font-medium">{children}</span>
+      <span className="font-semibold tracking-[0.02em]">{children}</span>
       <IconArrowNarrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
     </button>
   );

@@ -10,14 +10,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "an-black": "#0a0a0a",
-        "an-surface": "#111111",
-        "an-surface2": "#1a1a1a",
-        "an-gold": "#C9A84C",
-        "an-gold-dim": "rgba(201,168,76,0.15)",
-        "an-white": "#FFFFFF",
-        "an-muted": "#888888",
-        "an-border": "rgba(255,255,255,0.08)",
+        "an-black": "#030711",
+        "an-surface": "#0b1428",
+        "an-surface2": "#111f3c",
+        "an-gold": "#00e5ff",
+        "an-gold-dim": "rgba(0,229,255,0.2)",
+        "an-white": "#f8fbff",
+        "an-muted": "#91a8cf",
+        "an-border": "rgba(0, 229, 255, 0.24)",
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],
@@ -26,11 +26,21 @@ const config: Config = {
       },
       animation: {
         marquee: "marquee 30s linear infinite",
+        pulseGlow: "pulseGlow 2.6s ease-in-out infinite",
+        orbit: "orbit 16s linear infinite",
       },
       keyframes: {
         marquee: {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
+        },
+        pulseGlow: {
+          "0%, 100%": { opacity: "0.42" },
+          "50%": { opacity: "1" },
+        },
+        orbit: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
       },
     },

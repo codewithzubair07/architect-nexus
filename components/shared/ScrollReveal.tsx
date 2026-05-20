@@ -1,7 +1,8 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import { gsap, registerGsap } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
+import { applyScrollReveal } from "@/lib/scrollReveal";
 
 type ScrollRevealProps = {
   children: React.ReactNode;
@@ -17,30 +18,23 @@ export default function ScrollReveal({
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    registerGsap();
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
-    const targets = wrapper.children;
+    const id = `reveal-${Math.random().toString(36).slice(2)}`;
+    wrapper.setAttribute("data-reveal-id", id);
+    const targets = Array.from(wrapper.children);
+    targets.forEach((child) => child.setAttribute("data-reveal", id));
+
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        targets,
-        { opacity: 0, y: 60 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: staggerChildren,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: wrapper,
-            start: "top 85%",
-          },
-        }
-      );
+      applyScrollReveal(`[data-reveal='${id}']`, 42, staggerChildren);
     }, wrapper);
 
-    return () => ctx.revert();
+    return () => {
+      targets.forEach((child) => child.removeAttribute("data-reveal"));
+      wrapper.removeAttribute("data-reveal-id");
+      ctx.revert();
+    };
   }, [staggerChildren]);
 
   return (
